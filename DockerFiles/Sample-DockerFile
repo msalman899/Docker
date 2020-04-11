@@ -1,0 +1,29 @@
+FROM <base image>
+
+MAINTAINER <file author>
+
+# WORKDIR - used to set working dir
+# e.g WORKDIR /container/some/path
+WORKDIR <container_dir_path>
+
+# COPY - used to inject data from docker host to container
+# e.g COPY /host/some/path/ /container/some/path
+COPY <host_dir_path> <container_dir_path>
+
+# RUN - used to run commands inside container (e.g build instructions)
+# e.g RUN npm install , RUN mkdir something , etc..
+RUN <some_command>
+
+# EXPOSE - exposing port in the container
+EXPOSE 8080, 3000
+
+# ENTRYPOINT - when the containers starts, this will be the first command to be executed (PID 1)
+# Format - the command should be written in the form of list seperated by "white space"
+# e.g "python manage.py test" -->  ENTRYPOINT ["python","manage.py","test"]  , "node server.js" -->  ENTRYPOINT ["node","server.js"] 
+ENTRYPOINT ["cmd_1_word","cmd_2_word","cmd_3_word","cmd_4_word",...]
+
+# CMD - this represent an optional command that will be passed to the ENTRYPOINT as an argument (if specified else will run as a first command)
+# Format - the command should be written in the form of list seperated by "white space"
+# e.g "python manage.py test" -->  CMD ["python","manage.py","test"]  , "node server.js" -->  CMD ["node","server.js"] 
+CMD ["cmd_1_word","cmd_2_word","cmd_3_word","cmd_4_word",...]
+
