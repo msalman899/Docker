@@ -9,9 +9,9 @@ ENV PORT=3000
 
 WORKDIR /var/www
 
-COPY /src /var/www
+VOLUME /src /var/www
 
-VOLUMNE /src:/var/www
+COPY /src /var/www
 
 RUN npm install
 
