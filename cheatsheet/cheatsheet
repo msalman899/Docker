@@ -1,1 +1,6 @@
+### DockerFile ###
 
+--> Difference between ENTRYPOINT and CMD
+
+you cant overwrite ENTRYPOINT but CMD with an argument (if provided), when running a docker container from an image.
+e.g docker run --name dummy busybox "argument"
