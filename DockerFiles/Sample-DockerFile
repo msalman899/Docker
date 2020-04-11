@@ -6,21 +6,50 @@ MAINTAINER <file author>
 # e.g WORKDIR /container/some/path
 WORKDIR <container_dir_path>
 
+
+# ENV - set environment variable
+# e.g ENV PORT=9090
+ENV VAR1=value1
+ENV VAR2=value2
+
+
 # COPY - used to inject data from docker host to container
 # e.g COPY /host/some/path/ /container/some/path
 COPY <host_dir_path> <container_dir_path>
 
+
 # RUN - used to run commands inside container (e.g build instructions)
 # e.g RUN npm install , RUN mkdir something , etc..
 RUN <some_command>
+RUN <some_command>
+and so on
 
 # EXPOSE - exposing port in the container
 EXPOSE 8080, 3000
+
+
+# VOLUME - This will create a folder in container and either 
+# 1) map it to some random folder in host (if source folder not specified) OR  e.g VOLUMNE ["/var/www"]
+# 2) map it to provided folder in host (if source folder specified)  e.g VOLUMNE /src/code:/var/www
+VOLUME ["<container_dir_path1>","<container_dir_path2>",..] 
+VOLUME
+ - "<container_dir_path1>"
+ - "<container_dir_path2>"
+ - and so on
+OR
+VOLUME ["<host_dir_path1>:<container_dir_path1>","<host_dir_path1>:<container_dir_path2>",..] 
+VOLUME
+ - /src/code:/var/www
+ - /var/logs:/opt/app/logs
+ - and so on
+
+
 
 # ENTRYPOINT - when the containers starts, this will be the first command to be executed (PID 1)
 # Format - the command should be written in the form of list seperated by "white space"
 # e.g "python manage.py test" -->  ENTRYPOINT ["python","manage.py","test"]  , "node server.js" -->  ENTRYPOINT ["node","server.js"] 
 ENTRYPOINT ["cmd_1_word","cmd_2_word","cmd_3_word","cmd_4_word",...]
+
 
 # CMD - this represent an optional command that will be passed to the ENTRYPOINT as an argument (if specified else will run as a first command)
 # Format - the command should be written in the form of list seperated by "white space"
