@@ -2,7 +2,7 @@
 
 Build an app with below architecture / servers.
 
-- NGINX as reverse proxy
-- Nodejs
+- NGINX (reverse proxy)
+- python (web server)
 - Mongodb
 - Redis
