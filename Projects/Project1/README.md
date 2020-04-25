@@ -8,8 +8,8 @@ Build an app with below architecture / servers.
 
 **Setup**
 
-1 - Install python3 and pipenv
-2 - cd Project1 && pipenv install Django==2.2.10 (this will make a virtualenv name Project1)
-3 - pipenv shell (activate the virtualenv)
-4 - python manage.py startproject Project1 .
-5 - docker-compose up -d
+- Install python3 and pipenv
+- cd Project1 && pipenv install Django==2.2.10 (this will make a virtualenv name Project1)
+- pipenv shell (activate the virtualenv)
+- python manage.py startproject Project1 .
+- docker-compose up -d
