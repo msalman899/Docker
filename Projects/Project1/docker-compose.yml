@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+    nginx:
+      container_name: nginx
+      image: my-nginx
+      build:
+        context: .
+        dockerfile: dockerfiles/nginx.dockerfile
+      depends_on:
+        - node1
+        - node2
+      ports:
+        - "8080:80"
+        - "4433:443"
+      networks:
+        - app-network
+
+    node1:
+      container_name: python-1
+      image: my-python
+      build:
+        context: .
+        dockerfile: dockerfiles/python.dockerfile
+      ports:
+        - "8000:8000"
+      volumes:
+        - ${PWD}/Project1:/usr/src/app/Project1
+      working_dir: /usr/src/app
+      env_file:
+        - ./config/python.env
+#      command: python manage.py runserver 0.0.0.0:8000
+      depends_on:
+        - mongodb
+      networks:
+        - app-network
+
+    node2:
+      container_name: python-2
+      image: my-python
+      ports:
+        - "8001:8000"
+      volumes:
+        - ${PWD}/Project1:/usr/src/app/Project1
+      working_dir: /usr/src/app
+      env_file:
+        - ./config/python.env
+#      command: python manage.py runserver 0.0.0.0:8000
+      depends_on:
+        - node1
+        - mongodb
+      networks:
+        - app-network
+
+
+    mongodb:
+      container_name: mongo
+      image: mongo
+      ports:
+        - "27017:27017"
+      volumes:
+        - ${PWD}/mongodb:/data/db
+      env_file:
+        - ./config/mongo.env
+      networks:
+        - app-network
+
+networks:
+    app-network:
+      driver: bridge
